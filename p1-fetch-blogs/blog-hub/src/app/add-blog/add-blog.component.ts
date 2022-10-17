@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../models/blog';
+import { BlogService } from '../services/blog.service';
 
 @Component({
   selector: 'app-add-blog',
@@ -9,9 +10,12 @@ import { Blog } from '../models/blog';
 export class AddBlogComponent{
 
   blog: Blog = {};
-  constructor() { }
+  constructor(private blogservice:BlogService) { }
 
   saveBlog() {
-    
+    this.blogservice.postBlog(this.blog).subscribe( data =>{
+      alert("New Blog Added");
+      this.blog = {}
+    })
   }
 }
